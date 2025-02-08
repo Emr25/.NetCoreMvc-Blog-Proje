@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Domain.Entity.Blog>
+
+<h1 class="text-center my-5">Blog Sayfasına Hoşgeldiniz</h1>
+
+<div class="row">
+    <div class="col-md-6 mt-5">
+        <img src="https://thumbs.dreamstime.com/b/blogging-blog-concepts-ideas-worktable-blogging-blog-concepts-ideas-white-worktable-110423482.jpg" class="img-fluid rounded shadow" alt="E-ticaret Nedir">
+    </div>
+    <div class="col-md-6 mt-5">
+        <p class="lead">Lorem ipsum odor amet, consectetuer adipiscing elit. Imperdiet penatibus integer orci eros ac himenaeos. Adipiscing mattis scelerisque eleifend lacinia maximus. Sapien etiam sociosqu ex adipiscing rhoncus cubilia mus.</p>
+        <a  class="btn btn-dark btn-lg mt-3">Yeni bloglar yarat...</a>
+    </div>
+</div>
+
+<p class="mt-5">
+    <a asp-action="Create" class="btn btn-dark btn-lg">Yeni Blog Ekle</a>
+</p>
+
+<table class="table table-light table-hover mt-3">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">İncele</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                
+                <td>@item.Title</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary m-1">Düzenle</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger m-1">Sil</a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success m-1">Read</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
